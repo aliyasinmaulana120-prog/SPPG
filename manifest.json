@@ -1,0 +1,25 @@
+{
+  "name": "SPPG — Simulation, System Prediction Jatigede",
+  "short_name": "SPPG",
+  "description": "Simulasi panel gate, simulasi EDG, dan prediksi koreksi TMA Dam Karedok",
+  "lang": "id-ID",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#06101a",
+  "theme_color": "#06101a",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
