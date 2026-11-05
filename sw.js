@@ -1,4 +1,4 @@
-const CACHE_NAME = "sppg-pwa-v3";
+const CACHE_NAME = "sppg-pwa-v5";
 const CORE = [
   "./",
   "./index.html",
