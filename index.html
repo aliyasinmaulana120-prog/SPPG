@@ -2075,6 +2075,11 @@ async function openScanner(mode){
   const manualErr = document.getElementById('manualErr');
   if(!overlay || !video) return;
 
+  if(window.SPPGHGWC && window.SPPGHGWC.isActive()){
+    status.textContent = 'Kamera sedang digunakan Vision Control. Tekan Stop Camera pada panel Vision terlebih dahulu, lalu buka scanner kembali.';
+    return;
+  }
+
   stopScannerEngine();
   overlay.classList.add('active');
   status.textContent = 'Meminta akses kamera scanner...';
@@ -2136,7 +2141,7 @@ async function openScanner(mode){
     status.textContent = 'Library scanner tidak tersedia. Gunakan input kode manual.';
   }catch(err){
     console.error('Camera scanner error:', err);
-    status.textContent = 'Kamera tidak dapat diakses. Tutup Vision Control atau gunakan input kode manual.';
+    status.textContent = 'Kamera tidak dapat diakses. Pastikan Vision Control sudah dihentikan dengan tombol Stop Camera, atau gunakan input kode manual.';
     stopScannerEngine();
   }
 }
@@ -2307,16 +2312,29 @@ if ("serviceWorker" in navigator) {
       <div class="hgwc-actions">
         <button id="hgwc-start" class="hgwc-btn hgwc-primary" type="button">Aktifkan kamera</button>
         <button id="hgwc-pause" class="hgwc-btn" type="button" disabled>Pause</button>
-        <button id="hgwc-stop" class="hgwc-btn hgwc-danger" type="button" disabled>Emergency Stop</button>
+        <button id="hgwc-stop" class="hgwc-btn hgwc-danger" type="button" disabled>Stop Camera</button>
+      </div>
+      <div class="hgwc-zoom-controls" aria-label="Kontrol zoom website">
+        <span>Zoom Website</span>
+        <div class="hgwc-zoom-buttons">
+          <button id="hgwc-zoom-out" class="hgwc-btn" type="button" aria-label="Zoom out">−</button>
+          <strong id="hgwc-zoom-value">100%</strong>
+          <button id="hgwc-zoom-in" class="hgwc-btn" type="button" aria-label="Zoom in">+</button>
+          <button id="hgwc-zoom-reset" class="hgwc-btn" type="button">Reset</button>
+        </div>
       </div>
       <div class="hgwc-settings">
         <label class="hgwc-setting"><span>Mulai otomatis jika izin kamera sudah diberikan</span><input id="hgwc-auto" type="checkbox"></label>
         <label class="hgwc-setting"><span>Sensitivitas pointer</span><input id="hgwc-sensitivity" type="range" min="1" max="10" value="5"></label>
+        <label class="hgwc-setting"><span>Kecepatan scroll</span><input id="hgwc-scroll-sensitivity" type="range" min="3" max="12" value="8"></label>
+        <label class="hgwc-setting"><span>Jangkauan kendali tangan</span><input id="hgwc-hand-range" type="range" min="40" max="100" value="78"></label>
+        <label class="hgwc-setting"><span>Scroll meluncur (inertia) setelah gestur dilepas</span><input id="hgwc-inertia" type="checkbox" checked></label>
+        <button id="hgwc-calibrate" class="hgwc-btn" type="button">Kalibrasi ulang kendali</button>
         <label class="hgwc-setting"><span>Virtual keyboard otomatis saat input dipilih</span><input id="hgwc-auto-keyboard" type="checkbox" checked></label>
       </div>
       <div class="hgwc-help">
         <b>Gestur dasar</b>
-        <span>Telunjuk: pointer · Pinch: klik · Pinch tahan: drag · Telunjuk + tengah: scroll · Telapak terbuka 2 detik: Emergency Stop</span>
+        <span>Telunjuk: pointer · Pinch: klik · Pinch lalu geser/tahan: drag (3D, slider, panel simulasi) · Telunjuk + tengah naik/turun: scroll (modal & iframe ikut) · Ibu jari + telunjuk (jari lain menekuk) rentangkan/rapatkan: zoom, di simulasi 3D memperbesar tampilan 3D · Stop Camera: tombol manual</span>
       </div>
       <div class="hgwc-footer">
         <button id="hgwc-keyboard-toggle" class="hgwc-text-btn" type="button">Buka keyboard virtual</button>
