@@ -1,11 +1,15 @@
-const CACHE_NAME = "sppg-pwa-v27";
+const CACHE_NAME = "sppg-pwa-v28-hgwc";
 const CORE = [
   "./",
   "./index.html",
   "./manifest.json",
   "./icons/icon-180.png",
   "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./icons/icon-512.png",
+  "./assets/css/vision-control.css",
+  "./assets/js/vision/camera-manager.js",
+  "./assets/js/vision/hand-detector.js",
+  "./assets/js/vision/vision-app.js"
 ];
 
 self.addEventListener("install", event => {
